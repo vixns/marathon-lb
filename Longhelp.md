@@ -482,6 +482,9 @@ listen stats
   bind 0.0.0.0:9090
   balance
   mode http
+  option http-use-htx
+  http-request use-service prometheus-exporter if { path /metrics }
+  stats refresh 10s
   stats enable
   monitor-uri /_haproxy_health_check
   acl getpid path /_haproxy_getpids
