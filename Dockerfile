@@ -99,7 +99,10 @@ RUN set -x \
 
 COPY  . /marathon-lb
 
-RUN useradd -u 987 -g 987 runner && chown -R runner /marathon-lb /var/state/haproxy /var/run/haproxy
+RUN groupadd -g 987 runner \
+&& useradd -u 987 -g 987 runner \
+&& chown -R runner /marathon-lb /var/state/haproxy /var/run/haproxy
+
 USER runner
 
 WORKDIR /marathon-lb
