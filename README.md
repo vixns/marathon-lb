@@ -40,8 +40,8 @@ only exposed on LBs which have the same LB tag (or group) as defined in the Mara
 app's labels (using `HAPROXY_GROUP`). HAProxy parameters can be tuned by specify labels in your app.
 
 To create a virtual host or hosts the `HAPROXY_{n}_VHOST` label needs to be set on the
-given application. Applications with a vhost set will be exposed on ports 80
-and 443, in addition to their service port. Multiple virtual hosts may be specified
+given application. Applications with a vhost set will be exposed on ports 8080
+and 4443, in addition to their service port. Multiple virtual hosts may be specified
 in `HAPROXY_{n}_VHOST` using a comma as a delimiter between hostnames.
 
 All applications are also exposed on port 9091, using the `X-Marathon-App-Id`
@@ -205,7 +205,7 @@ For example, to replace `HAPROXY_HTTPS_FRONTEND_HEAD` with this content:
 
 ```
 frontend new_frontend_label
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 ```
 

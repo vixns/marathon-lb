@@ -121,12 +121,12 @@ The userlist for basic HTTP auth.
             ConfigTemplate(name='HTTP_FRONTEND_HEAD',
                            value='''
 frontend marathon_http_in
-  bind *:80
+  bind *:8080
   mode http
 ''',
                            overridable=False,
                            description='''\
-An HTTP frontend that binds to port *:80 by default and gathers
+An HTTP frontend that binds to port *:8080 by default and gathers
 all virtual hosts as defined by the `HAPROXY_{n}_VHOST` label.
 '''))
 
@@ -153,12 +153,12 @@ supported. Only the first HTTP port is available via this frontend.
             ConfigTemplate(name='HTTPS_FRONTEND_HEAD',
                            value='''
 frontend marathon_https_in
-  bind *:443 ssl {sslCerts}
+  bind *:4443 ssl {sslCerts}
   mode http
 ''',
                            overridable=False,
                            description='''\
-An HTTPS frontend for encrypted connections that binds to port *:443 by
+An HTTPS frontend for encrypted connections that binds to port *:4443 by
 default and gathers all virtual hosts as defined by the
 `HAPROXY_{n}_VHOST` label. You must modify this file to
 include your certificate.
@@ -167,14 +167,14 @@ include your certificate.
             ConfigTemplate(name='HTTPS_GROUPED_FRONTEND_HEAD',
                            value='''
 frontend marathon_https_in
-  bind *:443
+  bind *:4443
   mode tcp
   tcp-request inspect-delay 5s
   tcp-request content accept if { req_ssl_hello_type 1 }
 ''',
                            overridable=False,
                            description='''\
-An HTTPS frontend for encrypted connections that binds to port *:443 by
+An HTTPS frontend for encrypted connections that binds to port *:4443 by
 default and gathers all virtual hosts as defined by the
 `HAPROXY_{n}_VHOST` label. Useful for adding client certificated per domain.
 Works only with an enabled group-https-by-vhost flag.

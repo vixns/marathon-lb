@@ -101,7 +101,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 '''
         print("actual config:\n")
@@ -133,7 +133,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 '''
         print("actual config:\n")
@@ -159,7 +159,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /etc/haproxy/mysite.com.pem
+  bind *:4443 ssl crt /etc/haproxy/mysite.com.pem
   mode http
 '''
         self.assertMultiLineEqual(config, expected)
@@ -184,7 +184,7 @@ frontend marathon_http_appid_in
 
 frontend marathon_https_in
 '''
-        expected += "  bind *:443 ssl crt /etc/haproxy/mysite1.com.pem " \
+        expected += "  bind *:4443 ssl crt /etc/haproxy/mysite1.com.pem " \
                     "crt /etc/haproxy/mysite2.com.pem"
         expected += "\n  mode http\n"
         self.assertMultiLineEqual(config, expected)
@@ -226,7 +226,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -284,7 +284,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -339,7 +339,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
 
@@ -401,7 +401,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
   use_backend nginx_10000 if { ssl_fc_sni test }
@@ -465,7 +465,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
 
@@ -528,7 +528,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
   use_backend nginx_10000 if { ssl_fc_sni test }
@@ -599,7 +599,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl auth_test_example_com_nginx http_auth(user_nginx_10000)
   http-request auth realm "realm" if { ssl_fc_sni test.example.com } \
@@ -673,7 +673,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl auth_test_example_com_nginx http_auth(user_nginx_10000)
   http-request auth realm "realm" if { ssl_fc_sni test.example.com } \
@@ -752,7 +752,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   acl auth_test_example_com_nginx http_auth(user_nginx_10000)
@@ -829,7 +829,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   acl auth_test_example_com_nginx http_auth(user_nginx_10000)
@@ -901,7 +901,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   use_backend nginx_10000 if { ssl_fc_sni test.example.com } path_nginx_10000
@@ -966,7 +966,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   use_backend nginx_10000 if { ssl_fc_sni test.example.com } ''' + \
@@ -1034,7 +1034,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   use_backend nginx_10000 if { ssl_fc_sni test.example.com } path_nginx_10000
@@ -1101,7 +1101,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   use_backend nginx_10000 if { ssl_fc_sni test.example.com } ''' + \
@@ -1171,7 +1171,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg /some/path
   use_backend nginx_10000 if { ssl_fc_sni test.example.com } ''' + \
@@ -1234,7 +1234,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1292,7 +1292,7 @@ frontend marathon_http_appid_in
   use_backend pywebserver_10101 if app__pywebserver
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend pywebserver_10101 if { ssl_fc_sni myvhost.com }
 
@@ -1347,7 +1347,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1407,7 +1407,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1469,7 +1469,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1546,7 +1546,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1630,7 +1630,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1704,7 +1704,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
 
@@ -1753,7 +1753,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1808,7 +1808,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -1853,7 +1853,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10001
@@ -1903,7 +1903,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
 
@@ -1957,7 +1957,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
 
@@ -2012,7 +2012,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend nginx_10000 if { ssl_fc_sni test.example.com }
 
@@ -2062,7 +2062,7 @@ frontend marathon_http_appid_in
   mode http
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -2151,7 +2151,7 @@ frontend marathon_http_appid_in
   use_backend nginx3_10000 if app__nginx3
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx3_10000 path_beg /some/path
   use_backend nginx3_10000 if { ssl_fc_sni test.example.com } path_nginx3_10000
@@ -2279,7 +2279,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend %[ssl_fc_sni,lower,map(/etc/haproxy/domain2backend.map)]
 
@@ -2391,7 +2391,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_apache_10001 path_beg /apache
   use_backend apache_10001 if { ssl_fc_sni server.apache.net } \
@@ -2517,7 +2517,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl auth_server_nginx_net_nginx2 http_auth(user_nginx2_10001)
   http-request auth realm "realm" if { ssl_fc_sni server.nginx.net } \
@@ -2632,7 +2632,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_apache_10001 path_beg /apache
   use_backend apache_10001 if { ssl_fc_sni server.apache.net } \
@@ -2748,7 +2748,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend %[ssl_fc_sni,lower,map(/etc/haproxy/domain2backend.map)]
 
@@ -2849,7 +2849,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   acl path_nginx_10000 path_beg ''' + app.path + r'''
   use_backend nginx_10000 if { ssl_fc_sni testhost.com } path_nginx_10000
@@ -2911,7 +2911,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -2971,7 +2971,7 @@ frontend marathon_http_appid_in
   use_backend nginx_10000 if app__nginx
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
 
 frontend nginx_10000
@@ -3044,7 +3044,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend %[ssl_fc_sni,lower,map(/etc/haproxy/domain2backend.map)]
 
@@ -3118,7 +3118,7 @@ frontend marathon_http_appid_in
 map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443 ssl crt /tmp/cert.pem
+  bind *:4443 ssl crt /tmp/cert.pem
   mode http
   use_backend %[ssl_fc_sni,lower,map(/etc/haproxy/domain2backend.map)]
 
@@ -3228,7 +3228,7 @@ frontend marathon_http_appid_in
 lower,map(/etc/haproxy/app2backend.map)]
 
 frontend marathon_https_in
-  bind *:443
+  bind *:4443
   mode tcp
   tcp-request inspect-delay 5s
   tcp-request content accept if { req_ssl_hello_type 1 }

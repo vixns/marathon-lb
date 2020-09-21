@@ -633,7 +633,7 @@ The http auth request to the corresponding virtual host.
 
 Specified as `HAPROXY_HTTPS_FRONTEND_HEAD` template.
 
-An HTTPS frontend for encrypted connections that binds to port *:443 by
+An HTTPS frontend for encrypted connections that binds to port *:4443 by
 default and gathers all virtual hosts as defined by the
 `HAPROXY_{n}_VHOST` label. You must modify this file to
 include your certificate.
@@ -643,7 +643,7 @@ include your certificate.
 ```
 
 frontend marathon_https_in
-  bind *:443 ssl {sslCerts}
+  bind *:4443 ssl {sslCerts}
   mode http
 ```
 ## `HAPROXY_HTTPS_FRONTEND_ROUTING_ONLY_WITH_PATH_AND_AUTH`
@@ -670,7 +670,7 @@ glues the acl names to the appropriate backend
 
 Specified as `HAPROXY_HTTPS_GROUPED_FRONTEND_HEAD` template.
 
-An HTTPS frontend for encrypted connections that binds to port *:443 by
+An HTTPS frontend for encrypted connections that binds to port *:4443 by
 default and gathers all virtual hosts as defined by the
 `HAPROXY_{n}_VHOST` label. Useful for adding client certificated per domain.
 Works only with an enabled group-https-by-vhost flag.
@@ -680,7 +680,7 @@ Works only with an enabled group-https-by-vhost flag.
 ```
 
 frontend marathon_https_in
-  bind *:443
+  bind *:4443
   mode tcp
   tcp-request inspect-delay 5s
   tcp-request content accept if { req_ssl_hello_type 1 }
@@ -1004,7 +1004,7 @@ frontend marathon_http_appid_in
 
 Specified as `HAPROXY_HTTP_FRONTEND_HEAD` template.
 
-An HTTP frontend that binds to port *:80 by default and gathers
+An HTTP frontend that binds to port *:8080 by default and gathers
 all virtual hosts as defined by the `HAPROXY_{n}_VHOST` label.
 
 
@@ -1012,7 +1012,7 @@ all virtual hosts as defined by the `HAPROXY_{n}_VHOST` label.
 ```
 
 frontend marathon_http_in
-  bind *:80
+  bind *:8080
   mode http
 ```
 ## `HAPROXY_HTTP_FRONTEND_ROUTING_ONLY`
