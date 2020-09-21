@@ -466,7 +466,7 @@ def config(apps, groups, bind_http_https, ssl_certs, templater,
     groups = frozenset(groups)
     duplicate_map = {}
     # do not repeat use backend multiple times since map file is same.
-    _ssl_certs = ssl_certs or "/etc/ssl/cert.pem"
+    _ssl_certs = ssl_certs or "/tmp/cert.pem"
     _ssl_certs = _ssl_certs.split(",")
 
     if bind_http_https:
@@ -2158,7 +2158,7 @@ def get_arg_parser():
                         help="List of SSL certificates separated by comma"
                              "for frontend marathon_https_in"
                              "Ex: /etc/ssl/site1.co.pem,/etc/ssl/site2.co.pem",
-                        default="/etc/ssl/cert.pem")
+                        default="/tmp/cert.pem")
     parser.add_argument("--skip-validation",
                         help="Skip haproxy config file validation",
                         action="store_true")

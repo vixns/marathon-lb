@@ -87,7 +87,7 @@ optional arguments:
                         List of SSL certificates separated by commafor
                         frontend marathon_https_inEx:
                         /etc/ssl/site1.co.pem,/etc/ssl/site2.co.pem (default:
-                        /etc/ssl/cert.pem)
+                        /tmp/cert.pem)
   --skip-validation     Skip haproxy config file validation (default: False)
   --skip-config-cleanup
                         If one app fails, don't try to make configuration
@@ -1485,7 +1485,7 @@ Specified as `HAPROXY_{n}_SSL_CERT`.
 
 Enable the given SSL certificate for TLS/SSL traffic.
 
-Ex: `HAPROXY_0_SSL_CERT = '/etc/ssl/cert.pem'`
+Ex: `HAPROXY_0_SSL_CERT = '/tmp/cert.pem'`
                     
 
 ## `HAPROXY_{n}_STICKY`
