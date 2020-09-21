@@ -33,8 +33,7 @@ class ConfigTemplater(object):
             ConfigTemplate(name='HEAD',
                            value='''\
 global
-  log /dev/log local0
-  log /dev/log local1 notice
+  log stdout format raw local0 info
   spread-checks 5
   max-spread-checks 15000
   maxconn 50000
