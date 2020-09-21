@@ -62,6 +62,7 @@ AES256-SHA256:!aNULL:!MD5:!DSS
   lua-load /marathon-lb/getconfig.lua
   lua-load /marathon-lb/getmaps.lua
   lua-load /marathon-lb/signalmlb.lua
+  lua-load /marathon-lb/importvaultcert.lua
 defaults
   load-server-state-from-file global
   log               global
@@ -97,6 +98,8 @@ listen stats
   http-request use-service lua.signalmlbhup if signalmlbhup
   acl signalmlbusr1 path /_mlb_signal/usr1
   http-request use-service lua.signalmlbusr1 if signalmlbusr1
+  acl importvaultcert path /_import_cert
+  http-request use-service lua.importvaultcert if importvaultcert
 ''',
                            overridable=False,
                            description='''\
