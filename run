@@ -50,7 +50,7 @@ if [ $ssl_certs_pos -gt 0 ]; then
   set -- "${@:1:$(($ssl_certs_pos-2))}" "${@:$(($ssl_certs_pos+1))}"
   [ -n "${HAPROXY_SSL_CERT-}" ] && SSL_CERTS+=",/tmp/cert.pem"
 else
-  SSL_CERTS="/tmp/cert.pem"
+  SSL_CERTS="${HAPROXY_CERTS_DIR},/tmp/cert.pem"
 fi
 
 if [ -n "${HAPROXY_SSL_CERT-}" ]; then
@@ -75,6 +75,8 @@ elif [ $ssl_certs_pos -eq 0 ]; then  # if --ssl-certs wasn't passed as arg to th
   cat /tmp/server-cert.pem /tmp/server-key.pem > /tmp/cert.pem
   rm /tmp/server-*.pem
 fi
+
+mkdir -p ${HAPROXY_CERTS_DIR}
 
 if [ -n "${MESOS_SANDBOX-}" ] && [ -d "$MESOS_SANDBOX/templates" ]; then
   mkdir -p templates
