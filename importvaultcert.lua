@@ -13,8 +13,11 @@ function urldecode(s)
 	return s
 end
 
+local function isempty(s)
+  return s == nil or s == ''
+end
+
 function parseqs(s)
-	s = s:match('%s+(.+)')
 	local ans = {}
 	for k,v in s:gmatch('([^&=?]-)=([^&=?]+)' ) do
 		ans[ k ] = urldecode(v)
@@ -23,11 +26,16 @@ function parseqs(s)
 end
 
 core.register_service("importvaultcert", "http", function(applet)
-	local qs = parseqs(applet.qs)
-	local output, success, code = run("/marathon-lb/import-certs-from-vault.sh " ..  qs.fqdn, false)
+	local output, success, code
+	if isempty(applet.qs) then
+		output, success, code = run("/marathon-lb/import-certs-from-vault.sh", false)
+	else
+		local qs = parseqs(applet.qs)
+		output, success, code = run("/marathon-lb/import-certs-from-vault.sh " ..  qs.fqdn, false)
+	end
 	if not success then
 		send_response(applet, 500, string.format(
-			"Failed to import cert %s (exit code %d). %s", fqdn, code, output))
+			"Failed to import cert %s : %s", fqdn, output))
 		return
 	end
 
