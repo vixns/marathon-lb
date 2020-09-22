@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 oops () {
 	echo "Error: $1"
@@ -9,19 +9,18 @@ domain="$1"
 
 [ -n "$VAULT_ADDR" ] || oops "VAULT_ADDR required"
 [ -n "$VAULT_PREFIX" ] || oops "VAULT_PREFIX required"
-[ -n "$HAPROXY_CERTS_DIR" ] || oops "HAPROXY_CERTS_DIR required"
 
 VAULT_CMD=$(command -v vault)
 [ $? -eq 0 ] || oops "cannot find vault binary"
 
 # import-cert fqdn "key" "cert"
-import-cert () {
+import_cert () {
 sv status /marathon-lb/service/haproxy 2>&1 > /dev/null
 if [ $? -eq 0 ]
 then
-	echo "${2}\n${3}\n" | /marathon-lb/haproxy-import-cert.sh $1
+	echo -e "${2}\n${3}\n" | /marathon-lb/haproxy-import-cert.sh $1
 else
-	echo "${2}\n${3}\n" > "${HAPROXY_CERTS_DIR}${1}.pem"
+	echo -e "${2}\n${3}\n" > "${HAPROXY_CERTS_DIR}/${1}.pem"
 fi
 }
 
@@ -40,15 +39,15 @@ fi
 if [ -z "$domain" ]
 then
 # iterate domains and import them
-for domain in $($VAULT_CMD list ${VAULT_PREFIX} )
+for domain in $($VAULT_CMD list -format=yaml ${VAULT_PREFIX} | awk '{print $2}' | tr -d "'")
 do
-	import-cert \
+	import_cert \
 		"${domain}" \
 		"$($VAULT_CMD read -field=key "${VAULT_PREFIX}/${domain}")" \
 		"$($VAULT_CMD read -field=cert "${VAULT_PREFIX}/${domain}")"
 	done
 else
-	import-cert \
+	import_cert \
 		"${domain}" \
 		"$($VAULT_CMD read -field=key "${VAULT_PREFIX}/${domain}")" \
 		"$($VAULT_CMD read -field=cert "${VAULT_PREFIX}/${domain}")"
