@@ -155,6 +155,10 @@ chmod 755 $LB_SERVICE/finish
 
 fi
 
+if [ -n "$VAULT_ADDR" ]
+  /marathon-lb/import-certs-from-vault.sh
+fi
+
 runsvdir -P /marathon-lb/service &
 trap "kill -s 1 $!" TERM INT
 wait
