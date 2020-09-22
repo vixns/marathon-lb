@@ -156,6 +156,7 @@ chmod 755 $LB_SERVICE/finish
 fi
 
 if [ -n "$VAULT_ADDR" ]
+then
   /marathon-lb/import-certs-from-vault.sh
 fi
 
