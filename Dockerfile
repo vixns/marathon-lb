@@ -41,7 +41,8 @@ RUN set -x \
 
 ENV HAPROXY_MAJOR=2.2 \
     HAPROXY_VERSION=2.2.3 \
-    HAPROXY_MD5=f2af96bbafec0361358ccbe79593b5b8
+    HAPROXY_MD5=f2af96bbafec0361358ccbe79593b5b8 \
+    VAULT_VERSION=1.5.3
 
 COPY requirements.txt /marathon-lb/
 
@@ -59,6 +60,7 @@ RUN set -x \
         python3-setuptools \
         wget \
         zlib1g-dev \
+        unzip \
     ' \
     && apt-get update \
     && apt-get install -y --no-install-recommends $buildDeps \
@@ -92,7 +94,9 @@ RUN set -x \
 # a local package even if the system package is up-to-date as the system package
 # will probably be uninstalled with the build dependencies.
     && pip3 install --no-cache --upgrade --force-reinstall -r /marathon-lb/requirements.txt \
-    \
+    && wget -q https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip \
+    && unzip -q -d /usr/local/bin vault_${VAULT_VERSION}_linux_amd64.zip \
+    && rm vault_${VAULT_VERSION}_linux_amd64.zip \
     && apt-get purge -y --auto-remove $buildDeps \
 # Purge of python3-dev will delete python3 also
     && apt-get update && apt-get install -y --no-install-recommends python3
