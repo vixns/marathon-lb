@@ -40,9 +40,9 @@ RUN set -x \
 
 
 ENV HAPROXY_MAJOR=2.2 \
-    HAPROXY_VERSION=2.2.3 \
-    HAPROXY_MD5=f2af96bbafec0361358ccbe79593b5b8 \
-    VAULT_VERSION=1.5.3
+    HAPROXY_VERSION=2.2.5 \
+    HAPROXY_MD5=5a70481cc1a2dc5ed563e0eb44c32280 \
+    VAULT_VERSION=1.5.4
 
 COPY requirements.txt /marathon-lb/
 
