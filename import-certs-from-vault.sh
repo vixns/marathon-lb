@@ -18,7 +18,7 @@ import_cert () {
 sv status /marathon-lb/service/haproxy 2>&1 > /dev/null
 if [ $? -eq 0 ]
 then
-	echo -e "${2}\n${3}\n" | /marathon-lb/haproxy-import-cert.sh $1
+	echo -e "${2}\n${3}\n" | /marathon-lb/haproxy-import-cert.sh "$1"
 else
 	echo -e "${2}\n${3}\n" > "${HAPROXY_CERTS_DIR}/${1}.pem"
 fi
