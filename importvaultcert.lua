@@ -1,5 +1,5 @@
 function run(cmd)
-	local file = io.popen(cmd)
+	local file = assert(io.popen(cmd))
 	local output = file:read('*a')
 	local success, _, code = file:close()
 	return output, success, code
