@@ -1914,7 +1914,7 @@ def make_config_valid_and_regenerate(marathon,
                                                          app_map_array,
                                                          haproxy_map)
             if not config_valid:
-                logger.warn(
+                logger.warning(
                     "invalid configuration caused by app %s; "
                     "it will be excluded", app["id"])
                 del valid_apps[-1]
