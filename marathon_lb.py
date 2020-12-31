@@ -1394,7 +1394,7 @@ def validateConfig(haproxy_config_file):
         return True
 
     # Check that config is valid
-    cmd = ['haproxy', '-f', haproxy_config_file, '-c']
+    cmd = ['haproxy', '-f', haproxy_config_file, '-c', '-q']
     logger.debug("checking config with command: " + str(cmd))
     returncode = subprocess.call(args=cmd)
     if returncode == 0:
